@@ -41,6 +41,8 @@
     "jwtSecretKey": "NjUyZTdlM2ZjMDgyZDVhMTQ4NmIzYzdkNmFkZjllYzMxY2ZiMzI5NDk1N2VlODI1ZGJkNTdkYmFjYzkwNWNmNDQ1MGUzYTJiMTM0ODI2NGY3MzBmOWI4N2I1NjY2YjQzZDM3ZWJmYWJmMWU0ZDYzZWMzMzliMmVkZjFkMjIzM2E=",
     "clientPackageManager": "npm",
     "clientThemeVariant": "",
-    "languages": ["en", "fr"]
+    "languages": ["en", "fr"],
+    "entities": ["AppUser", "Catalog", "Sport", "Review"],
+    "lastLiquibaseTimestamp": 1625842222000
   }
 }

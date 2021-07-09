@@ -1,0 +1,56 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="appUser">
+      <h2 data-cy="appUserDetailsHeading"><span>App User</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span>Id App User</span></dt>
+        <dd>
+          <span>{{ appUser.idAppUser }}</span>
+        </dd>
+        <dt><span>First Name</span></dt>
+        <dd>
+          <span>{{ appUser.firstName }}</span>
+        </dd>
+        <dt><span>Last Name</span></dt>
+        <dd>
+          <span>{{ appUser.lastName }}</span>
+        </dd>
+        <dt><span>C NP</span></dt>
+        <dd>
+          <span>{{ appUser.cNP }}</span>
+        </dd>
+        <dt><span>Grupa</span></dt>
+        <dd>
+          <span>{{ appUser.grupa }}</span>
+        </dd>
+        <dt><span>An</span></dt>
+        <dd>
+          <span>{{ appUser.an }}</span>
+        </dd>
+        <dt><span>Disciplina</span></dt>
+        <dd>
+          <span>{{ appUser.disciplina }}</span>
+        </dd>
+        <dt><span>User</span></dt>
+        <dd>
+          <span>{{ appUser.user?.id }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/app-user', appUser.idAppUser, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

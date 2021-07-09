@@ -1,0 +1,73 @@
+{
+  "name": "AppUser",
+  "fields": [
+    {
+      "fieldName": "idAppUser",
+      "fieldType": "Long",
+      "options": {
+        "id": true
+      }
+    },
+    {
+      "fieldName": "firstName",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "lastName",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "cNP",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "grupa",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "an",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "disciplina",
+      "fieldType": "String"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-one",
+      "otherEntityName": "user",
+      "otherEntityRelationshipName": "appUser",
+      "relationshipName": "user",
+      "ownerSide": true
+    },
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "catalog",
+      "otherEntityRelationshipName": "appUser",
+      "relationshipName": "idCatalog"
+    },
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "sport",
+      "otherEntityRelationshipName": "appUser",
+      "relationshipName": "idSport"
+    },
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "review",
+      "otherEntityRelationshipName": "appUser",
+      "relationshipName": "idReview"
+    }
+  ],
+  "entityTableName": "app_user",
+  "dto": "mapstruct",
+  "pagination": "infinite-scroll",
+  "service": "serviceImpl",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": "*",
+  "changelogDate": "20210709145019"
+}

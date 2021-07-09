@@ -1,0 +1,42 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="sport">
+      <h2 data-cy="sportDetailsHeading"><span>Sport</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span>Id Sport</span></dt>
+        <dd>
+          <span>{{ sport.idSport }}</span>
+        </dd>
+        <dt><span>Nume</span></dt>
+        <dd>
+          <span>{{ sport.nume }}</span>
+        </dd>
+        <dt><span>Locatie</span></dt>
+        <dd>
+          <span>{{ sport.locatie }}</span>
+        </dd>
+        <dt><span>App User</span></dt>
+        <dd>
+          <div *ngIf="sport.appUser">
+            <a [routerLink]="['/app-user', sport.appUser?.idAppUser, 'view']">{{ sport.appUser?.idAppUser }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/sport', sport.idSport, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,42 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="review">
+      <h2 data-cy="reviewDetailsHeading"><span>Review</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span>Id Review</span></dt>
+        <dd>
+          <span>{{ review.idReview }}</span>
+        </dd>
+        <dt><span>Nota</span></dt>
+        <dd>
+          <span>{{ review.nota }}</span>
+        </dd>
+        <dt><span>Comentariu</span></dt>
+        <dd>
+          <span>{{ review.comentariu }}</span>
+        </dd>
+        <dt><span>App User</span></dt>
+        <dd>
+          <div *ngIf="review.appUser">
+            <a [routerLink]="['/app-user', review.appUser?.idAppUser, 'view']">{{ review.appUser?.idAppUser }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/review', review.idReview, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

@@ -95,6 +95,7 @@
   },
   "defaultProject": "licenta-2021",
   "cli": {
+    "analytics": false,
     "packageManager": "npm"
   }
 }

@@ -1,0 +1,38 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="catalog">
+      <h2 data-cy="catalogDetailsHeading"><span>Catalog</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span>Id Catalog</span></dt>
+        <dd>
+          <span>{{ catalog.idCatalog }}</span>
+        </dd>
+        <dt><span>Nota</span></dt>
+        <dd>
+          <span>{{ catalog.nota }}</span>
+        </dd>
+        <dt><span>App User</span></dt>
+        <dd>
+          <div *ngIf="catalog.appUser">
+            <a [routerLink]="['/app-user', catalog.appUser?.idAppUser, 'view']">{{ catalog.appUser?.idAppUser }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/catalog', catalog.idCatalog, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,65 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-sport-heading" data-cy="SportCreateUpdateHeading">Create or edit a Sport</h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="form-group" [hidden]="editForm.get('idSport')!.value == null">
+          <label class="form-control-label" for="field_idSport">Id Sport</label>
+          <input
+            type="number"
+            class="form-control"
+            name="idSport"
+            id="field_idSport"
+            data-cy="idSport"
+            formControlName="idSport"
+            [readonly]="true"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_nume">Nume</label>
+          <input type="text" class="form-control" name="nume" id="field_nume" data-cy="nume" formControlName="nume" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_locatie">Locatie</label>
+          <input type="text" class="form-control" name="locatie" id="field_locatie" data-cy="locatie" formControlName="locatie" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_appUser">App User</label>
+          <select class="form-control" id="field_appUser" data-cy="appUser" name="appUser" formControlName="appUser">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="
+                appUserOption.idAppUser === editForm.get('appUser')!.value?.idAppUser ? editForm.get('appUser')!.value : appUserOption
+              "
+              *ngFor="let appUserOption of appUsersSharedCollection; trackBy: trackAppUserByIdAppUser"
+            >
+              {{ appUserOption.idAppUser }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

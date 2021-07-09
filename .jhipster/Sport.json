@@ -1,0 +1,38 @@
+{
+  "name": "Sport",
+  "fields": [
+    {
+      "fieldName": "idSport",
+      "fieldType": "Long",
+      "options": {
+        "id": true
+      }
+    },
+    {
+      "fieldName": "nume",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "locatie",
+      "fieldType": "String"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "appUser",
+      "otherEntityRelationshipName": "idSport",
+      "relationshipName": "appUser"
+    }
+  ],
+  "entityTableName": "sport",
+  "dto": "mapstruct",
+  "pagination": "infinite-scroll",
+  "service": "serviceImpl",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": "*",
+  "changelogDate": "20210709145021"
+}

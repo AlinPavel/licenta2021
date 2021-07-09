@@ -1,0 +1,34 @@
+{
+  "name": "Catalog",
+  "fields": [
+    {
+      "fieldName": "idCatalog",
+      "fieldType": "Long",
+      "options": {
+        "id": true
+      }
+    },
+    {
+      "fieldName": "nota",
+      "fieldType": "Double"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "appUser",
+      "otherEntityRelationshipName": "idCatalog",
+      "relationshipName": "appUser"
+    }
+  ],
+  "entityTableName": "catalog",
+  "dto": "mapstruct",
+  "pagination": "infinite-scroll",
+  "service": "serviceImpl",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": "*",
+  "changelogDate": "20210709145020"
+}

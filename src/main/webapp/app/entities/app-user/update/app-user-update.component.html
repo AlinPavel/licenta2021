@@ -1,0 +1,90 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-app-user-heading" data-cy="AppUserCreateUpdateHeading">Create or edit a App User</h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="form-group" [hidden]="editForm.get('idAppUser')!.value == null">
+          <label class="form-control-label" for="field_idAppUser">Id App User</label>
+          <input
+            type="number"
+            class="form-control"
+            name="idAppUser"
+            id="field_idAppUser"
+            data-cy="idAppUser"
+            formControlName="idAppUser"
+            [readonly]="true"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_firstName">First Name</label>
+          <input type="text" class="form-control" name="firstName" id="field_firstName" data-cy="firstName" formControlName="firstName" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_lastName">Last Name</label>
+          <input type="text" class="form-control" name="lastName" id="field_lastName" data-cy="lastName" formControlName="lastName" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_cNP">C NP</label>
+          <input type="number" class="form-control" name="cNP" id="field_cNP" data-cy="cNP" formControlName="cNP" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_grupa">Grupa</label>
+          <input type="number" class="form-control" name="grupa" id="field_grupa" data-cy="grupa" formControlName="grupa" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_an">An</label>
+          <input type="number" class="form-control" name="an" id="field_an" data-cy="an" formControlName="an" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_disciplina">Disciplina</label>
+          <input
+            type="text"
+            class="form-control"
+            name="disciplina"
+            id="field_disciplina"
+            data-cy="disciplina"
+            formControlName="disciplina"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_user">User</label>
+          <select class="form-control" id="field_user" data-cy="user" name="user" formControlName="user">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="userOption.id === editForm.get('user')!.value?.id ? editForm.get('user')!.value : userOption"
+              *ngFor="let userOption of usersSharedCollection; trackBy: trackUserById"
+            >
+              {{ userOption.id }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

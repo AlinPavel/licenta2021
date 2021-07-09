@@ -1,0 +1,59 @@
+entity AppUser {
+    @Id idAppUser Long,
+    FirstName String,
+    LastName String,
+    CNP Long,
+    Grupa Integer,
+    An Integer,
+    Disciplina String
+}
+
+entity Catalog{
+ @Id idCatalog Long,
+ Nota Double
+}
+ 
+
+entity Sport{
+@Id idSport Long,
+Nume String,
+Locatie String
+}
+
+entity Review{
+@Id idReview Long,
+Nota Integer,
+Comentariu String
+}
+
+
+relationship OneToMany{
+AppUser{idCatalog} to Catalog
+}
+
+relationship OneToMany{
+AppUser{idSport} to Sport
+}
+relationship OneToMany{
+AppUser{idReview} to Review
+}
+
+relationship OneToOne{
+AppUser{user} to User{appUser}
+}
+
+paginate AppUser, Sport, Review, Catalog with infinite-scroll
+
+dto * with mapstruct
+
+service all with serviceImpl
+
+// Set pagination options
+
+// Use Data Transfer Objects (DTO)
+// dto * with mapstruct
+
+// Set service options to all except few
+
+// Set an angular suffix
+// angularSuffix * with mySuffix
