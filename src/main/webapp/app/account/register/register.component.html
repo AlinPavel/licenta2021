@@ -51,6 +51,66 @@
         </div>
 
         <div class="form-group">
+          <label class="form-control-label" for="firstName">Prenumele</label>
+          <input
+            type="text"
+            class="form-control"
+            id="firstName"
+            name="firstName"
+            placeholder="Prenumele"
+            formControlName="firstName"
+            data-cy="fistname"
+          />
+
+          <div
+            *ngIf="
+              registerForm.get('firstName')!.invalid && (registerForm.get('firstName')!.dirty || registerForm.get('firstName')!.touched)
+            "
+          >
+            <small class="form-text text-danger" *ngIf="registerForm.get('firstName')?.errors?.required">
+              Prenumele este obligatoriu.
+            </small>
+
+            <small class="form-text text-danger" *ngIf="registerForm.get('firstName')?.errors?.minlength">
+              Prenumele trebuie sa aiba minim un caracter.
+            </small>
+
+            <small class="form-text text-danger" *ngIf="registerForm.get('firstName')?.errors?.maxlength">
+              Prenumele nu poate avea mai mult de 50 de caractere.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="lastName">Numele de familie</label>
+          <input
+            type="text"
+            class="form-control"
+            id="lastName"
+            name="lastName"
+            placeholder="Numele de familie"
+            formControlName="lastName"
+            data-cy="lastName"
+          />
+
+          <div
+            *ngIf="registerForm.get('lastName')!.invalid && (registerForm.get('lastName')!.dirty || registerForm.get('lastName')!.touched)"
+          >
+            <small class="form-text text-danger" *ngIf="registerForm.get('lastName')?.errors?.required">
+              Numele de familie este obligatoriu.
+            </small>
+
+            <small class="form-text text-danger" *ngIf="registerForm.get('lastName')?.errors?.minlength">
+              Numele de familie trebuie sa aiba minim un caracter.
+            </small>
+
+            <small class="form-text text-danger" *ngIf="registerForm.get('lastName')?.errors?.maxlength">
+              Numele de familie nu poate avea mai mult de 50 de caractere.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
           <label class="form-control-label" for="email">Email</label>
           <input
             type="email"
@@ -140,15 +200,6 @@
 
         <button type="submit" [disabled]="registerForm.invalid" class="btn btn-primary" data-cy="submit">Register</button>
       </form>
-
-      <div class="mt-3 alert alert-warning">
-        <span>If you want to </span>
-        <a class="alert-link" routerLink="/login">sign in</a
-        ><span
-          >, you can try the default accounts:<br />- Administrator (login="admin" and password="admin") <br />- User (login="user" and
-          password="user").</span
-        >
-      </div>
     </div>
   </div>
 </div>

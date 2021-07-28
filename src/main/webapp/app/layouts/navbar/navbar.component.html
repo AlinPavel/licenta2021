@@ -1,8 +1,7 @@
 <nav data-cy="navbar" class="navbar navbar-dark navbar-expand-md bg-dark">
   <a class="navbar-brand logo" routerLink="/" (click)="collapseNavbar()">
-    <span class="logo-img"></span>
-    <span class="navbar-title">Licenta2021</span>
-    <span class="navbar-version">{{ version }}</span>
+    <span class="logo-img.jpg"></span>
+    <span class="navbar-title">Sporturile Universitatii din Bucuresti</span>
   </a>
   <a
     class="navbar-toggler d-lg-none"
@@ -126,25 +125,15 @@
               <span>Health</span>
             </a>
           </li>
-          <li>
-            <a class="dropdown-item" routerLink="admin/configuration" routerLinkActive="active" (click)="collapseNavbar()">
-              <fa-icon icon="cogs" [fixedWidth]="true"></fa-icon>
-              <span>Configuration</span>
-            </a>
-          </li>
+
           <li>
             <a class="dropdown-item" routerLink="admin/logs" routerLinkActive="active" (click)="collapseNavbar()">
               <fa-icon icon="tasks" [fixedWidth]="true"></fa-icon>
               <span>Logs</span>
             </a>
+
+            <!-- jhipster-needle-add-element-to-admin-menu - JHipster will add entities to the admin menu here -->
           </li>
-          <li *ngIf="openAPIEnabled">
-            <a class="dropdown-item" routerLink="admin/docs" routerLinkActive="active" (click)="collapseNavbar()">
-              <fa-icon icon="book" [fixedWidth]="true"></fa-icon>
-              <span>API</span>
-            </a>
-          </li>
-          <!-- jhipster-needle-add-element-to-admin-menu - JHipster will add entities to the admin menu here -->
         </ul>
       </li>
       <li

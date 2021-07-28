@@ -1,13 +1,16 @@
 package com.licenta.web.rest;
 
+import com.licenta.domain.AppUser;
 import com.licenta.domain.User;
 import com.licenta.repository.UserRepository;
 import com.licenta.security.SecurityUtils;
+import com.licenta.service.AppUserService;
 import com.licenta.service.MailService;
 import com.licenta.service.UserService;
 import com.licenta.service.dto.AdminUserDTO;
+import com.licenta.service.dto.AppUserDTO;
 import com.licenta.service.dto.PasswordChangeDTO;
-import com.licenta.service.dto.UserDTO;
+import com.licenta.service.mapper.AppUserMapper;
 import com.licenta.web.rest.errors.*;
 import com.licenta.web.rest.vm.KeyAndPasswordVM;
 import com.licenta.web.rest.vm.ManagedUserVM;
@@ -42,10 +45,22 @@ public class AccountResource {
 
     private final MailService mailService;
 
-    public AccountResource(UserRepository userRepository, UserService userService, MailService mailService) {
+    private final AppUserService appUserService;
+
+    private final AppUserMapper appUserMapper;
+
+    public AccountResource(
+        UserRepository userRepository,
+        UserService userService,
+        MailService mailService,
+        AppUserService appUserService,
+        AppUserMapper appUserMapper
+    ) {
         this.userRepository = userRepository;
         this.userService = userService;
         this.mailService = mailService;
+        this.appUserService = appUserService;
+        this.appUserMapper = appUserMapper;
     }
 
     /**
@@ -64,6 +79,11 @@ public class AccountResource {
         }
         User user = userService.registerUser(managedUserVM, managedUserVM.getPassword());
         mailService.sendActivationEmail(user);
+        AppUser appUser = new AppUser();
+        appUser.setUser(user);
+        appUserService.save(appUserMapper.toDto(appUser));
+        //        appUser.setFirstName(user.getFirstName());
+        //        appUser.setLastName(user.getLastName());
     }
 
     /**
