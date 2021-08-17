@@ -5,11 +5,14 @@ import com.licenta.repository.ReviewRepository;
 import com.licenta.service.ReviewService;
 import com.licenta.service.dto.ReviewDTO;
 import com.licenta.service.mapper.ReviewMapper;
+import java.util.List;
 import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -60,6 +63,14 @@ public class ReviewServiceImpl implements ReviewService {
     public Page<ReviewDTO> findAll(Pageable pageable) {
         log.debug("Request to get all Reviews");
         return reviewRepository.findAll(pageable).map(reviewMapper::toDto);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Page<Review> findLastReviews(Pageable pageable) {
+        log.debug("Request to get all Reviews");
+        Page<Review> reviewList = reviewRepository.findTop5ByOrderByIdReviewDesc(pageable);
+        return reviewList;
     }
 
     @Override

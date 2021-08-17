@@ -21,6 +21,7 @@ export class AppUserComponent implements OnInit {
   page: number;
   predicate: string;
   ascending: boolean;
+  idAppUserCurrent: number;
 
   constructor(protected appUserService: AppUserService, protected modalService: NgbModal, protected parseLinks: ParseLinks) {
     this.appUsers = [];
@@ -31,6 +32,8 @@ export class AppUserComponent implements OnInit {
     };
     this.predicate = 'idAppUser';
     this.ascending = true;
+    this.idAppUserCurrent = 0;
+    this.getIdAppUser();
   }
 
   loadAll(): void {
@@ -80,6 +83,16 @@ export class AppUserComponent implements OnInit {
       if (reason === 'deleted') {
         this.reset();
       }
+    });
+  }
+
+  checkIdAppUser(idAppUser: number): boolean {
+    return this.idAppUserCurrent === idAppUser;
+  }
+
+  getIdAppUser(): any {
+    this.appUserService.findIdAppUser().subscribe((appUserId: number) => {
+      this.idAppUserCurrent = appUserId;
     });
   }
 

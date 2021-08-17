@@ -1,5 +1,6 @@
 package com.licenta.web.rest;
 
+import com.licenta.domain.Review;
 import com.licenta.repository.ReviewRepository;
 import com.licenta.service.ReviewService;
 import com.licenta.service.dto.ReviewDTO;
@@ -177,5 +178,12 @@ public class ReviewResource {
             .noContent()
             .headers(HeaderUtil.createEntityDeletionAlert(applicationName, false, ENTITY_NAME, id.toString()))
             .build();
+    }
+
+    @GetMapping("/last/reviews")
+    public ResponseEntity<List<Review>> getLastReviews(Pageable pageable) {
+        Page<Review> page = reviewService.findLastReviews(pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
+        return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
 }

@@ -23,6 +23,7 @@ export class AppUserUpdateComponent implements OnInit {
     idAppUser: [],
     firstName: [],
     lastName: [],
+    email: [],
     cNP: [],
     grupa: [],
     an: [],

@@ -31,6 +31,7 @@ export class ReviewComponent implements OnInit {
     };
     this.predicate = 'idReview';
     this.ascending = true;
+    this.getLast5Review();
   }
 
   loadAll(): void {
@@ -41,6 +42,24 @@ export class ReviewComponent implements OnInit {
         page: this.page,
         size: this.itemsPerPage,
         sort: this.sort(),
+      })
+      .subscribe(
+        (res: HttpResponse<IReview[]>) => {
+          this.isLoading = false;
+          this.paginateReviews(res.body, res.headers);
+        },
+        () => {
+          this.isLoading = false;
+        }
+      );
+  }
+
+  getLast5Review(): void {
+    this.isLoading = true;
+
+    this.reviewService
+      .findLastReviews({
+        page: this.page,
       })
       .subscribe(
         (res: HttpResponse<IReview[]>) => {

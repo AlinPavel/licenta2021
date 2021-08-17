@@ -1,8 +1,10 @@
 package com.licenta.web.rest.custom;
 
+import com.licenta.domain.AppUser;
 import com.licenta.domain.User;
 import com.licenta.repository.AppUserRepository;
 import com.licenta.repository.UserRepository;
+import com.licenta.security.SecurityUtils;
 import com.licenta.service.AppUserService;
 import com.licenta.service.MailService;
 import com.licenta.service.UserService;
@@ -87,6 +89,17 @@ public class AccountCustomResources {
         appUserDTO.setFirstName(ManagedUserVM.getFirstName());
         appUserDTO.setLastName(ManagedUserVM.getLastName());
         appUserService.save(appUserDTO);
+    }
+
+    @GetMapping("/current/appuser")
+    public Long getAppUserId() {
+        Long result = Long.valueOf("0");
+        if (SecurityUtils.getCurrentUserLogin().flatMap(userRepository::findOneByLogin).isPresent()) {
+            User user = SecurityUtils.getCurrentUserLogin().flatMap(userRepository::findOneByLogin).get();
+            AppUser appUser = appUserRepository.findAppUserByUserId(user.getId()).get();
+            result = appUser.getIdAppUser();
+        }
+        return result;
     }
 
     private static boolean isPasswordLengthInvalid(String password) {

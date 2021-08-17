@@ -10,6 +10,6 @@ export class RegisterService {
   constructor(private http: HttpClient, private applicationConfigService: ApplicationConfigService) {}
 
   save(registration: Registration): Observable<{}> {
-    return this.http.post(this.applicationConfigService.getEndpointFor('api/register'), registration);
+    return this.http.post(this.applicationConfigService.getEndpointFor('api/custom/register'), registration);
   }
 }

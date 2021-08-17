@@ -15,6 +15,7 @@ export interface IAppUser {
   idCatalogs?: ICatalog[] | null;
   idSports?: ISport[] | null;
   idReviews?: IReview[] | null;
+  email?: string;
 }
 
 export class AppUser implements IAppUser {
@@ -29,7 +30,8 @@ export class AppUser implements IAppUser {
     public user?: IUser | null,
     public idCatalogs?: ICatalog[] | null,
     public idSports?: ISport[] | null,
-    public idReviews?: IReview[] | null
+    public idReviews?: IReview[] | null,
+    public email?: string
   ) {}
 }
 

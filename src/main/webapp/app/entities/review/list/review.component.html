@@ -1,31 +1,85 @@
 <div>
   <h2 id="page-heading" data-cy="ReviewHeading">
-    <span>Reviews</span>
+    <div class="heading>"><span>Reviews</span></div>
 
     <div class="d-flex justify-content-end">
       <button class="btn btn-info mr-2" (click)="reset()" [disabled]="isLoading">
         <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
         <span>Refresh List</span>
       </button>
-
-      <button
-        id="jh-create-entity"
-        data-cy="entityCreateButton"
-        class="btn btn-primary jh-create-entity create-review"
-        [routerLink]="['/review/new']"
-      >
-        <fa-icon icon="plus"></fa-icon>
-        <span> Create a new Review </span>
-      </button>
     </div>
   </h2>
 
-  <jhi-alert-error></jhi-alert-error>
-
-  <jhi-alert></jhi-alert>
+  <div class="table-responsive" id="entities" *ngIf="reviews && reviews.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="reset.bind(this)">
+          <th scope="col" jhiSortBy="idCatalog"><span>Id Review</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="nota"><span>Nota</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="appUser.idAppUser"><span>Comentariu</span> <fa-icon icon="sort"></fa-icon></th>
+        </tr>
+      </thead>
+      <tbody infinite-scroll (scrolled)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']" [infiniteScrollDistance]="0">
+        <tr *ngFor="let review of reviews" data-cy="entityTable">
+          <td>
+            {{ review.idReview }}
+          </td>
+          <td>{{ review.nota }}</td>
+          <td>
+            {{ review.comentariu }}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 
   <head>
     <style>
+      .heading {
+        margin-left: 42%;
+        margin-right: 25%;
+        color: #33383b;
+        font-size: 45px;
+        font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+      }
+
+      th {
+        padding: 20px 15px;
+        text-align: left;
+        font-weight: 500;
+        font-size: 12px;
+        color: #fff;
+        text-transform: uppercase;
+        background-color: #33383b;
+        font-size: 20px;
+      }
+      td {
+        padding: 15px;
+        text-align: left;
+        vertical-align: middle;
+        font-weight: 300;
+        font-size: 12px;
+        color: #fff;
+        border-bottom: solid 1px rgba(255, 255, 255, 0.1);
+
+        font-size: 20px;
+      }
+      a {
+        padding: 15px;
+        text-align: left;
+        vertical-align: middle;
+        font-weight: 300;
+        font-size: 12px;
+        color: #fff;
+        border-bottom: solid 1px rgba(255, 255, 255, 0.1);
+
+        font-size: 20px;
+      }
+      tbody {
+        background: -webkit-linear-gradient(left, #04062b, #6ce3ee);
+        background: linear-gradient(to right, #04062b, #6ce3ee);
+        font-family: 'Roboto', sans-serif;
+      }
       .w-layout-grid {
         display: -ms-grid;
         display: grid;
@@ -14499,6 +14553,10 @@
     </style>
   </head>
   <body>
+    <br />
+    <br />
+    <br />
+    <br />
     <a
       id="notification"
       data-w-id="8d8e0eff-8d04-785f-c906-6c48769d43b7"
@@ -14521,7 +14579,9 @@
             <div id="w-node-_5e406ddc-ba75-0fa9-722a-d3831b4ad959-8cf14f6d">
               <div class="cta11-title-wrap">
                 <div class="size3-text size3-top-clear">Review<br /></div>
-                <p class="paragraph-70 paragraph70-bottom-clear">Alege Profesorul/Materia pentru care doresti sa faci un review<br /></p>
+                <p class="paragraph-70 paragraph70-bottom-clear">
+                  Alege Profesorul/Materia pentru care doresti sa faci un review in comentarii si acorda o nota<br />
+                </p>
               </div>
               <div>
                 <div class="cta11-item-wrap">
@@ -14545,7 +14605,8 @@
                   placeholder="Profesor"
                   id="email-3"
                   required=""
-                /><input
+                />
+                <input
                   type="text"
                   class="text-field bottom-margin-field w-input"
                   maxlength="256"
@@ -14561,14 +14622,22 @@
                   name="field-2"
                   data-name="Field 2"
                   class="text-area w-input"
-                ></textarea
-                ><input type="submit" value="Submit" data-wait="Please wait..." class="button-small form-centered-button w-button" />
+                ></textarea>
+                <button
+                  id="jh-create-entity"
+                  data-cy="entityCreateButton"
+                  class="button-small form-centered-button w-button"
+                  [routerLink]="['/review/new']"
+                >
+                  <span> Create a new Review </span>
+                </button>
               </form>
             </div>
           </div>
         </div>
       </div>
     </div>
+
     <div class="wrapper m20-100">
       <div class="section">
         <div class="w-layout-grid content29-grid">
@@ -14579,10 +14648,10 @@
             <div class="content29-qa-item-wrap">
               <div class="deco-dot"></div>
               <div>
-                <div class="text-label">Where are your products manufactured?</div>
+                <div class="text-label">REVIEW-UL MEU VA FI PUBLIC SI PENTRU PROFESORI?</div>
                 <p class="paragraph-70">
-                  We look for the finest craftsmen for each of our products. As a result, we work with manufacturers all over the world. We
-                  currently work with manufacturers in Vietnam, China, Indonesia, and India.<br />
+                  Este la alegerea fiecarui student daca doreste sa isi faca review-ul public sau nu.Daca acesti nu doresc sa isi dezvaluie
+                  identitatea pot sa nu completeze campul App_User si asa vor ramane anonimi.<br />
                 </p>
               </div>
             </div>
@@ -14591,10 +14660,9 @@
             <div class="content29-qa-item-wrap">
               <div class="deco-dot"></div>
               <div>
-                <div class="text-label">Are finish colors shown in your photos accurate?</div>
+                <div class="text-label">POT SCHIMBA SPORTUL DACA M-AM RAZGANDIT?</div>
                 <p class="paragraph-70">
-                  All photos on our website are taken by professional photographers under lighting conditions that are typical in a
-                  residential home.<br />
+                  Da, se poate face edit in categoria Sporturi, iar admin-ul va muta prezentele acumulate catre cealalta materie.<br />
                 </p>
               </div>
             </div>
@@ -14603,10 +14671,10 @@
             <div class="content29-qa-item-wrap">
               <div class="deco-dot"></div>
               <div>
-                <div class="text-label">Which products would you recommend for dog owners?</div>
+                <div class="text-label">CE SE INTAMPLA CU REVIEW-UL MEU?</div>
                 <p class="paragraph-70">
-                  Is your sofa actually an expensive dog bed? Same. We recommend leather for pet owners because it’s durable and lends
-                  itself nicely to that lived-in look.<br />
+                  Toate review-urile sunt stocate si inregistrate de catre admin, urmand ca dupa analiza acestora sa se ia masuri daca este
+                  nevoie de o schimbare.<br />
                 </p>
               </div>
             </div>
@@ -14615,10 +14683,9 @@
             <div class="content29-qa-item-wrap">
               <div class="deco-dot"></div>
               <div>
-                <div class="text-label">Can I place my order by phone?</div>
+                <div class="text-label">De ce nu ne vedem numele langa note?</div>
                 <p class="paragraph-70">
-                  Absolutely! If you would like to place your order over the phone you can speak with a
-                  <a href="#" class="link">member</a> of our friendly team.<br />
+                  Deoarece notele sunt private in acest an si le veti putea asocia cu Id-ul de user oferit la logarea in aplicatie.<br />
                 </p>
               </div>
             </div>

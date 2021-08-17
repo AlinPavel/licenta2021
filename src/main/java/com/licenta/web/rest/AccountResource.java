@@ -80,7 +80,10 @@ public class AccountResource {
         User user = userService.registerUser(managedUserVM, managedUserVM.getPassword());
         mailService.sendActivationEmail(user);
         AppUser appUser = new AppUser();
+        log.debug("User reg:{}", user);
         appUser.setUser(user);
+        appUser.setFirstName(managedUserVM.getFirstName());
+        appUser.setLastName(managedUserVM.getLastName());
         appUserService.save(appUserMapper.toDto(appUser));
         //        appUser.setFirstName(user.getFirstName());
         //        appUser.setLastName(user.getLastName());

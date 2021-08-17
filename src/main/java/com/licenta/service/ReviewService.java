@@ -1,5 +1,6 @@
 package com.licenta.service;
 
+import com.licenta.domain.Review;
 import com.licenta.service.dto.ReviewDTO;
 import java.util.Optional;
 import org.springframework.data.domain.Page;
@@ -47,4 +48,6 @@ public interface ReviewService {
      * @param id the id of the entity.
      */
     void delete(Long id);
+
+    Page<Review> findLastReviews(Pageable pageable);
 }

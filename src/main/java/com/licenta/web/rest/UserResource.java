@@ -2,8 +2,10 @@ package com.licenta.web.rest;
 
 import com.licenta.config.Constants;
 import com.licenta.domain.User;
+import com.licenta.repository.AppUserRepository;
 import com.licenta.repository.UserRepository;
 import com.licenta.security.AuthoritiesConstants;
+import com.licenta.service.AppUserService;
 import com.licenta.service.MailService;
 import com.licenta.service.UserService;
 import com.licenta.service.dto.AdminUserDTO;
@@ -75,10 +77,22 @@ public class UserResource {
 
     private final MailService mailService;
 
-    public UserResource(UserService userService, UserRepository userRepository, MailService mailService) {
+    private final AppUserService appUserService;
+
+    private final AppUserRepository appUserRepository;
+
+    public UserResource(
+        UserService userService,
+        UserRepository userRepository,
+        MailService mailService,
+        AppUserService appUserService,
+        AppUserRepository appUserRepository
+    ) {
         this.userService = userService;
         this.userRepository = userRepository;
         this.mailService = mailService;
+        this.appUserService = appUserService;
+        this.appUserRepository = appUserRepository;
     }
 
     /**
@@ -191,7 +205,11 @@ public class UserResource {
     @PreAuthorize("hasAuthority(\"" + AuthoritiesConstants.ADMIN + "\")")
     public ResponseEntity<Void> deleteUser(@PathVariable @Pattern(regexp = Constants.LOGIN_REGEX) String login) {
         log.debug("REST request to delete User: {}", login);
+        User user = userRepository.findByUserLogin(login);
+        appUserRepository.deleteAppUser(user.getId());
+
         userService.deleteUser(login);
+
         return ResponseEntity
             .noContent()
             .headers(HeaderUtil.createAlert(applicationName, "A user is deleted with identifier " + login, login))

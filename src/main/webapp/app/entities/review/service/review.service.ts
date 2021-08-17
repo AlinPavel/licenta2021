@@ -14,6 +14,8 @@ export type EntityArrayResponseType = HttpResponse<IReview[]>;
 export class ReviewService {
   public resourceUrl = this.applicationConfigService.getEndpointFor('api/reviews');
 
+  public lastReviewsUrl = this.applicationConfigService.getEndpointFor('api/reviews/last/reviews');
+
   constructor(protected http: HttpClient, private applicationConfigService: ApplicationConfigService) {}
 
   create(review: IReview): Observable<EntityResponseType> {
@@ -30,6 +32,11 @@ export class ReviewService {
 
   find(id: number): Observable<EntityResponseType> {
     return this.http.get<IReview>(`${this.resourceUrl}/${id}`, { observe: 'response' });
+  }
+
+  findLastReviews(req?: any): Observable<EntityArrayResponseType> {
+    const options = createRequestOption(req);
+    return this.http.get<IReview[]>(this.lastReviewsUrl, { params: options, observe: 'response' });
   }
 
   query(req?: any): Observable<EntityArrayResponseType> {
