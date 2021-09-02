@@ -17,6 +17,7 @@
           <th scope="col" jhiSortBy="idCatalog"><span>Id Review</span> <fa-icon icon="sort"></fa-icon></th>
           <th scope="col" jhiSortBy="nota"><span>Nota</span> <fa-icon icon="sort"></fa-icon></th>
           <th scope="col" jhiSortBy="appUser.idAppUser"><span>Comentariu</span> <fa-icon icon="sort"></fa-icon></th>
+          <th></th>
         </tr>
       </thead>
       <tbody infinite-scroll (scrolled)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']" [infiniteScrollDistance]="0">
@@ -27,6 +28,18 @@
           <td>{{ review.nota }}</td>
           <td>
             {{ review.comentariu }}
+          </td>
+          <td>
+            <button
+              *jhiHasAnyAuthority="'ROLE_ADMIN'"
+              type="submit"
+              (click)="delete(review)"
+              class="btn btn-danger btn-sm"
+              data-cy="entityDeleteButton"
+            >
+              <fa-icon icon="times"></fa-icon>
+              <span class="d-none d-md-inline">Delete</span>
+            </button>
           </td>
         </tr>
       </tbody>
@@ -76,8 +89,8 @@
         font-size: 20px;
       }
       tbody {
-        background: -webkit-linear-gradient(left, #04062b, #6ce3ee);
-        background: linear-gradient(to right, #04062b, #6ce3ee);
+        background: -webkit-linear-gradient(left, #04062b, #337e85);
+        background: linear-gradient(to right, #04062b, #337e85);
         font-family: 'Roboto', sans-serif;
       }
       .w-layout-grid {

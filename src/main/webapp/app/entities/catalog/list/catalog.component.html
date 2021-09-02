@@ -84,6 +84,7 @@
           <th scope="col" jhiSortBy="idCatalog"><span>Id Catalog</span> <fa-icon icon="sort"></fa-icon></th>
           <th scope="col" jhiSortBy="nota"><span>Nota</span> <fa-icon icon="sort"></fa-icon></th>
           <th scope="col" jhiSortBy="appUser.idAppUser"><span>App User</span> <fa-icon icon="sort"></fa-icon></th>
+          <th></th>
           <th scope="col"></th>
         </tr>
       </thead>
@@ -98,6 +99,7 @@
               <a [routerLink]="['/app-user', catalog.appUser?.idAppUser, 'view']">{{ catalog.appUser?.idAppUser }}</a>
             </div>
           </td>
+          <td></td>
           <td class="text-right">
             <div class="btn-group">
               <button
