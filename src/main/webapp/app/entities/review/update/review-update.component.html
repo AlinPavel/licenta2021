@@ -35,21 +35,6 @@
             formControlName="comentariu"
           />
         </div>
-
-        <div class="form-group">
-          <label class="form-control-label" for="field_appUser">App User</label>
-          <select class="form-control" id="field_appUser" data-cy="appUser" name="appUser" formControlName="appUser">
-            <option [ngValue]="null"></option>
-            <option
-              [ngValue]="
-                appUserOption.idAppUser === editForm.get('appUser')!.value?.idAppUser ? editForm.get('appUser')!.value : appUserOption
-              "
-              *ngFor="let appUserOption of appUsersSharedCollection; trackBy: trackAppUserByIdAppUser"
-            >
-              {{ appUserOption.idAppUser }}
-            </option>
-          </select>
-        </div>
       </div>
 
       <div>
