@@ -917,6 +917,7 @@
         </profile>
         <profile>
             <id>prod</id>
+
             <dependencies>
                 <dependency>
                     <groupId>org.springframework.boot</groupId>
